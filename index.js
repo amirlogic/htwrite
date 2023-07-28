@@ -1,6 +1,10 @@
 
+const {treestk, brandata, contree, treecont, contbranch} = require('./htree.js')
+
+const modules = require('./modules.js');
 
 const BOOTSRAP_LINK = `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">`
+
 
 
 const webpage = (title = 'HTML Page', xhead='', payload='') => {
@@ -161,21 +165,48 @@ function setBranchHtml(brid='', bhtml='') {
 }
 
 function modAct(modret) {
-	let mdata = {};
+	
+    let htdata = '';
 
 	for (ml in modret) {
+
 		if (modret[ml][0] == 'hwrite') {
+
 			setBranchHtml(modret[ml][2], modret[ml][3]);
+
 		} else if (modret[ml][0] == 'htrefresh') {
-			return renderGrid(modret[ml][1]);
+
+			htdata = renderGrid(modret[ml][1]);
+
 		} else {
+
 			console.warn('modAct: Unknown action');
 		}
 		//console.log( [modret[ml][0], modret[ml][1], modret[ml][2] ] )
 	}
 
-	return mdata;
+	return htdata;
+}
+
+const getHtml = (stk=[])=>{
+
+    let html = ''
+
+    let actrr = []
+
+    for(let s=0; s<stk.length; s++)
+    {
+        let modrr = modules(stk[s].target, stk[s].payload);
+
+        actrr.push(...modrr)
+
+    }
+
+    // only one
+    html += modAct(actrr);
+
+    return html
 }
 
 
-module.exports = { webpage,  };
+module.exports = { webpage, getHtml };
