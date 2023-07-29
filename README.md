@@ -41,7 +41,7 @@ You can also generate static .html files
 
 ```javascript
 
-const { getHtml, webpage } = require('./index.js')
+const { getHtml, webpage } = require('htwrite')
 
 const fs = require('fs');
 
