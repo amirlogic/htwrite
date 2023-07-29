@@ -1,5 +1,5 @@
 {
-  "name": "json-htree",
+  "name": "htwrite",
   "version": "0.1.0",
   "description": "Generates HTML from json tree",
   "main": "index.js",

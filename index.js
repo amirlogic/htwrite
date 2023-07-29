@@ -190,22 +190,22 @@ function modAct(modret) {
 
 const getHtml = (stk=[])=>{
 
-    let html = ''
+    //let html = ''
 
     let actrr = []
 
     for(let s=0; s<stk.length; s++)
     {
-        let modrr = modules(stk[s].target, stk[s].payload);
+        let modrr = modules(stk[s][0], stk[s][1]);
 
         actrr.push(...modrr)
 
     }
 
     // only one
-    html += modAct(actrr);
+    //html += modAct(actrr);
 
-    return html
+    return modAct(actrr) //html
 }
 
 
