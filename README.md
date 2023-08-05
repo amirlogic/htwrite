@@ -65,3 +65,5 @@ fs.writeFile('demo.html', filecontent, function (err) {
 
 
 ```
+
+See also: https://nestedlogic.vercel.app/htwrite
