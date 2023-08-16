@@ -51,7 +51,37 @@ module.exports = (target, hdata) => {
 			['hwrite', true, 'f70cc0fa-1619-4a78-8c72-bfd2dc454ff7', htcont],
 			['htrefresh', '1584ab29-ce52-4c55-91db-8bd152f71152'],
 		];
-	} else if (target == 'b63ac4e2-6ba6-48cd-a774-58d51e1eac12') {
+	}
+	else if( target == "b290a78d-4d92-4c2f-8f5c-6f8e9949c082" ){ // Image selector [ leftcol + maincol ] 
+
+		let k = 0;
+		
+		let imgselect = hdata?.payload.map((opt,indx)=>{
+		
+		    if(hdata?.imgkey === opt.key) k = indx;
+		
+		    return `<div class="p-2 border my-2 fs-5${(hdata?.imgkey === opt.key) ? ' bg-light text-dark' : ' text-black-50'}" data-bindto="${hdata?.bindto}" data-func="click" data-aval="${opt.key}">
+						${opt.title}
+				   </div>`
+		}).join('')
+		
+		let imght = `<div class="py-4">
+			<figure>
+				<img alt="image" src="${hdata?.payload[k].src}" class="d-block mx-auto" />
+				<figcaption class="text-center text-black-50">${hdata?.payload[k].caption}</figcaption>
+			</figure>
+		</div>
+		<div class="p-4 fs-5 mx-4 text-body">${hdata?.payload[k].body}</div>`
+		
+		return [ 
+					["hwrite",true,"50110a76-fa72-42bf-9f66-69fb449ab60b", imgselect ], 
+					["hwrite",true,"f7cf9396-967d-4204-9c67-b540f4c299d2", imght ], 
+					["htrefresh","1584ab29-ce52-4c55-91db-8bd152f71152"] 
+		]
+
+
+	}
+	else if (target == 'b63ac4e2-6ba6-48cd-a774-58d51e1eac12') {
 		// Simple one col list
 
 		let htrows = hdata?.list
