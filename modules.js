@@ -60,14 +60,14 @@ module.exports = (target, hdata) => {
 		
 		    if(hdata?.imgkey === opt.key) k = indx;
 		
-		    return `<div class="p-2 border my-2 fs-5${(hdata?.imgkey === opt.key) ? ' bg-light text-dark' : ' text-black-50'}" data-bindto="${hdata?.bindto}" data-func="click" data-aval="${opt.key}">
+		    return `<div class="p-2 my-2 fs-5${(hdata?.imgkey === opt.key) ? ' bg-light border text-dark' : ' text-black-50'}" data-bindto="${hdata?.bindto}" data-func="click" data-aval="${opt.key}">
 						${opt.title}
 				   </div>`
 		}).join('')
 		
 		let imght = `<div class="py-4">
 			<figure>
-				<img alt="image" src="${hdata?.payload[k].src}" class="d-block mx-auto" />
+				<img alt="image" src="${hdata?.payload[k].src}" class="d-block mx-auto" style="height:70vh;" />
 				<figcaption class="text-center text-black-50">${hdata?.payload[k].caption}</figcaption>
 			</figure>
 		</div>

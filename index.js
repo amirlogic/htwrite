@@ -7,7 +7,9 @@ const BOOTSRAP_LINK = `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/
 
 
 
-const webpage = (title = 'HTML Page', xhead='', payload='') => {
+const webpage = (title = 'HTML Page', xhead='', payload='',opts={}) => {
+
+	const apipath = ( opts.hasOwnProperty('apipath') ) ? opts.apipath : 'api';
 
 	return `<!doctype html>
           <html>
@@ -22,7 +24,7 @@ const webpage = (title = 'HTML Page', xhead='', payload='') => {
 
                 async function sendToServer( ndl, cdata = {} ){
 
-                  fetch('/api',{
+                  fetch('/${apipath}',{
 
                     method: 'POST',
                     mode: 'cors', 
@@ -168,21 +170,30 @@ function modAct(modret) {
 	
     let htdata = '';
 
-	for (ml in modret) {
+	try{
 
-		if (modret[ml][0] == 'hwrite') {
+		for (ml in modret) {
 
-			setBranchHtml(modret[ml][2], modret[ml][3]);
+			if (modret[ml][0] == 'hwrite') {
 
-		} else if (modret[ml][0] == 'htrefresh') {
+				setBranchHtml(modret[ml][2], modret[ml][3]);
 
-			htdata = renderGrid(modret[ml][1]);
+			} else if (modret[ml][0] == 'htrefresh') {
 
-		} else {
+				htdata = renderGrid(modret[ml][1]);
 
-			console.warn('modAct: Unknown action');
+			} else {
+
+				console.warn('modAct: Unknown action ${modret[ml][0]}');
+			}
+			
 		}
-		//console.log( [modret[ml][0], modret[ml][1], modret[ml][2] ] )
+	}
+	catch(err){
+
+		htdata = '<!-- EMPTY -->'
+
+		console.error(err)
 	}
 
 	return htdata;
@@ -190,22 +201,24 @@ function modAct(modret) {
 
 const getHtml = (stk=[])=>{
 
-    //let html = ''
-
     let actrr = []
 
-    for(let s=0; s<stk.length; s++)
-    {
-        let modrr = modules(stk[s][0], stk[s][1]);
+	try{
 
-        actrr.push(...modrr)
+		for(let s=0; s<stk.length; s++)
+		{
+			let modrr = modules(stk[s][0], stk[s][1]);
 
-    }
+			actrr.push(...modrr)
 
-    // only one
-    //html += modAct(actrr);
+		}
+	}
+	catch(err){
 
-    return modAct(actrr) //html
+		console.error(err)
+	}
+    
+    return modAct(actrr)
 }
 
 
