@@ -66,4 +66,18 @@ fs.writeFile('demo.html', filecontent, function (err) {
 
 ```
 
+## webpage
+
+`webpage(title,xhead,body,opts)`
+
+
+`title` (string) webpage title
+
+`xhead` (string) extra CSS and scripts for the head section
+
+`body` (string) html for the body section
+
+`opts` (object) extra options
+
+
 See also: https://nestedlogic.vercel.app/htwrite
