@@ -66,18 +66,23 @@ fs.writeFile('demo.html', filecontent, function (err) {
 
 ```
 
-## webpage
+## Webpage wrapper
 
 `webpage(title,xhead,body,opts)`
 
 
-`title` (string) webpage title
+`title` (string) webpage title  
 
-`xhead` (string) extra CSS and scripts for the head section
+`xhead` (string) extra CSS and scripts for the head section  
 
-`body` (string) html for the body section
+`body` (string) html for the body section  
 
-`opts` (object) extra options
+`opts` (object) extra options  
+
+
+| key       | description                               |
+|-----------|-------------------------------------------|
+| apipath   | backend api path                          |
 
 
 See also: https://nestedlogic.vercel.app/htwrite
